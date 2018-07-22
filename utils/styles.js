@@ -1,3 +1,5 @@
+import { black, gray } from './colors';
+
 export const container = {
   flex: 1,
   backgroundColor: '#fff',
@@ -5,6 +7,10 @@ export const container = {
   justifyContent: 'center'
 };
 
-export const DeckTitle = {
-  fontSize: 20
+export const deckTitle = {
+  color: black
+};
+
+export const deckSubtitle = {
+  color: gray
 };
