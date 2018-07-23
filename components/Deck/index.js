@@ -1,39 +1,34 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import Introduction from './../../components/Introduction';
 import { container, deckTitle, deckSubtitle } from './../../utils/styles';
 import { black } from './../../utils/colors';
 
 class Deck extends Component {
   static navigationOptions({ navigation }) {
     return {
-      title: navigation.state.params.deckList.name
+      title: navigation.state.params.deck.title
     };
   }
 
   render() {
-    const { navigation = {} } = this.props;
-    const { state = {} } = navigation;
-    const { params = {} } = state;
-    const { deckList, decks } = params;
-    const card = deckList;
-    const { questions } = decks;
+    const { navigation } = this.props;
     return (
       <View style={container}>
-        <Text style={[styles.deckTitle, { fontSize: 30 }]}>{card.name}</Text>
-        <Text style={[styles.deckSubtitle, { fontSize: 17 }]}>
-          {card.cards} {card.cards === 1 ? 'card' : 'cards'}
-        </Text>
+        <Introduction
+          titleSize={30}
+          subtitleSize={17}
+          deck={navigation.state.params.deck}
+        />
+
         <View style={{ marginTop: 80, width: 300 }}>
-          <TouchableOpacity
-            onPress={() => navigation.navigate('AddCard', { card: decks })}
-          >
+          <TouchableOpacity onPress={() => navigation.navigate('AddCard')}>
             <Text style={[styles.button, { borderColor: black, color: black }]}>
               Add a card
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => navigation.navigate('Quiz', { questions })}
-          >
+
+          <TouchableOpacity onPress={() => navigation.navigate('Quiz')}>
             <Text
               style={[
                 styles.button,

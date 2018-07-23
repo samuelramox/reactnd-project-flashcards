@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
+import Introduction from './../../components/Introduction';
 import { listDecks } from './../../actions/deck';
 import { getDecks, setDecks } from './../../utils/api';
-import { container, deckTitle, deckSubtitle } from './../../utils/styles';
 import { gray } from './../../utils/colors';
 import initialData from './../../utils/initialData.json';
 
@@ -15,22 +15,25 @@ class Decks extends Component {
       isFetching: true
     };
   }
-  async componentDidMount() {
-    const { dispatch } = this.props;
-    await setDecks(initialData);
 
-    getDecks().then(result => {
-      dispatch(listDecks(JSON.parse(result)));
-      this.setState({
-        isFetching: false
-      });
+  componentDidMount() {
+    const { dispatch, decks } = this.props;
+    dispatch(listDecks(initialData));
+    this.setState({
+      isFetching: false
     });
   }
+
+  // componentWillReceiveProps (nextProps) {
+  //   const { decks } = this.props
+  //   console.log('deckProps', decks)
+  //   console.log('deck next Props', nextProps.decks)
+  // }
 
   render() {
     const { navigation = {}, decks } = this.props;
     const { isFetching } = this.state;
-    console.log(decks);
+    const decksArray = decks !== undefined ? Object.values(decks) : [];
     if (isFetching) {
       return (
         <View style={styles.container}>
@@ -38,25 +41,24 @@ class Decks extends Component {
         </View>
       );
     }
+    if (decksArray.length === 0) {
+      return (
+        <View style={styles.container}>
+          <Text>
+            DeckList is empty, click on the newDeck tab for insert a new Deck
+          </Text>
+        </View>
+      );
+    }
     return (
       <View>
-        {decks.map((item, index) => (
+        {decksArray.map(deck => (
           <TouchableOpacity
-            key={item.name}
+            key={deck.title}
             style={styles.item}
-            onPress={() =>
-              navigation.navigate('Deck', {
-                decks: decks[item.name],
-                deckList: item
-              })
-            }
+            onPress={() => navigation.navigate('Deck', { deck })}
           >
-            <Text style={[styles.deckTitle, { fontSize: 22 }]}>
-              {item.name}
-            </Text>
-            <Text style={[styles.deckSubtitle, { fontSize: 13 }]}>
-              {item.cards} {item.cards === 1 ? 'card' : 'cards'}
-            </Text>
+            <Introduction titleSize={22} subtitleSize={13} deck={deck} />
           </TouchableOpacity>
         ))}
       </View>
@@ -73,20 +75,16 @@ Decks.defaultProps = {
 };
 
 const styles = StyleSheet.create({
-  container,
-  deckTitle,
-  deckSubtitle,
   item: {
     height: 100,
     borderBottomColor: gray,
     borderBottomWidth: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
+    justifyContent: 'center'
   }
 });
 
 const mapStateToProps = state => ({
-  decks: state.listDecks
+  decks: state.decks
 });
 
 export default connect(mapStateToProps)(Decks);
