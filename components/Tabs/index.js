@@ -1,9 +1,9 @@
-import { TabNavigator } from 'react-navigation';
+import { createBottomTabNavigator } from 'react-navigation';
 import AddDeck from '../AddDeck';
 import Decks from '../Decks';
 import { yellow } from '../../utils/colors';
 
-const Tabs = TabNavigator(
+const Tabs = createBottomTabNavigator(
   {
     Decks: {
       screen: Decks
