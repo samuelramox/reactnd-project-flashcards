@@ -18,7 +18,7 @@ const Introduction = props => {
   );
 };
 
-CardIntroduction.propTypes = {
+Introduction.propTypes = {
   titleSize: PropTypes.number.isRequired,
   subtitleSize: PropTypes.number.isRequired
 };
