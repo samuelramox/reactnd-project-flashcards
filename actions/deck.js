@@ -1,6 +1,4 @@
-export const LIST_DECKS = 'LIST_DECKS';
-export const NEW_DECK = 'NEW_DECK';
-export const ADD_CARD = 'ADD_CARD';
+import { LIST_DECKS, NEW_DECK, ADD_CARD } from './../utils/actionTypes';
 
 export function listDecks(decks) {
   return {

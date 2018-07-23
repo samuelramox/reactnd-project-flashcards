@@ -39,10 +39,10 @@ class AddDeck extends Component {
     await updateDecks(newDeckObj);
     getDecks()
       .then(res => dispatch(listDecks(JSON.parse(res))))
-      .then(() => {
+      .then(res => {
         alert('Data inserted with success');
         const { navigation } = this.props;
-        navigation.navigate('Decks');
+        navigation.navigate('Decks', { deck: newDeckObj[titleDeck] });
       });
   };
 
