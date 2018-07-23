@@ -7,6 +7,9 @@ import {
   KeyboardAvoidingView,
   TouchableOpacity
 } from 'react-native';
+import { connect } from 'react-redux';
+import { listDecks } from './../../actions/deck';
+import { getDecks, updateDecks } from './../../utils/api';
 import { container, deckTitle } from './../../utils/styles';
 import { black } from './../../utils/colors';
 
@@ -17,35 +20,15 @@ class AddCard extends Component {
       question: '',
       answer: ''
     };
+    this.submitValue = this.submitValue.bind(this);
   }
 
-  async submitValue() {
-    const { dispatch, navigation, deckList } = this.props;
-    const { question, answer } = this.state;
-    const cardName = this.getCard(this.props);
-    const questionObj = {
-      question,
-      answer
-    };
-    const { questions } = deckList[cardName];
-    questions.push(questionObj);
-    const newObj = {
-      [cardName]: {
-        title: cardName,
-        questions
-      }
-    };
-    await dispatch(createNewCard(newObj));
-    alert('Card Succesfully created');
-    console.log('Updated list', deckList);
+  submitValue() {
+    const { answer, question } = this.state;
   }
 
   render() {
     const { question, answer } = this.state;
-    const { navigation } = this.props;
-    const { state = {} } = navigation;
-    const { params = {} } = state;
-    const { card } = params;
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
         <View style={{ width: 300 }}>
@@ -55,7 +38,7 @@ class AddCard extends Component {
               { fontSize: 18, marginBottom: 30, textAlign: 'center' }
             ]}
           >
-            Type your question for the new {card.title} Card
+            Type your question for the new Card
           </Text>
 
           <TextInput
@@ -110,4 +93,10 @@ const styles = StyleSheet.create({
   }
 });
 
-export default AddCard;
+const mapStateToProps = state => {
+  return {
+    decks: state.decks
+  };
+};
+
+export default connect(mapStateToProps)(AddCard);

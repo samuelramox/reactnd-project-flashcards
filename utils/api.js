@@ -10,7 +10,7 @@ export function updateDecks(deck) {
   return AsyncStorage.mergeItem(
     STORAGE_KEY,
     JSON.stringify({
-      decks: deck
+      ...deck
     })
   );
 }

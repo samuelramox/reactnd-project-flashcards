@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
   View,
+  Alert,
   Text,
   StyleSheet,
   TextInput,
@@ -9,6 +10,9 @@ import {
   AsyncStorage
 } from 'react-native';
 import { NavigationActions } from 'react-navigation';
+import { connect } from 'react-redux';
+import { updateDecks, getDecks } from './../../utils/api';
+import { listDecks } from './../../actions/deck';
 import { container, deckTitle } from './../../utils/styles';
 import { black } from './../../utils/colors';
 
@@ -18,32 +22,15 @@ class AddDeck extends Component {
     this.state = {
       titleDeck: ''
     };
+    this.submit = this.submit.bind(this);
   }
 
-  submit = async () => {
+  submit() {
     const { titleDeck } = this.state;
-    const { decks, dispatch, navigation } = this.props;
-    const newDeckObj = {
-      [titleDeck]: {
-        title: titleDeck,
-        questions: []
-      }
-    };
-    const key = '@Udacity:flashcards';
-    await dispatch(newDeck(newDeckObj));
-    alert('data succesfully updated');
-    AsyncStorage.setItem(key, JSON.stringify(decks));
-    const navigateAction = NavigationActions.navigate({
-      routeName: 'NewDeck',
-      params: { decks },
-      action: NavigationActions.navigate({ routeName: 'Home' })
-    });
-  };
+  }
 
   render() {
     const { titleDeck } = this.state;
-    const { dispatch, decks } = this.props;
-
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
         <View style={{ width: 300 }}>
@@ -101,4 +88,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default AddDeck;
+export default connect()(AddDeck);
