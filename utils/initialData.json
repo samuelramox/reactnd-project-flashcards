@@ -1,0 +1,26 @@
+{
+  "JavaScript": {
+    "title": "JavaScript",
+    "questions": [
+      {
+        "questions": "What is JavaScript?",
+        "answer":
+          "JavaScript is a high-level, interpreted programming language."
+      }
+    ]
+  },
+  "Python": {
+    "title": "Python",
+    "questions": [
+      {
+        "question": "What is Python?",
+        "answer":
+          "Python is an interpreted high-level programming language for general-purpose programming."
+      },
+      {
+        "question": "Who is the creator of python?",
+        "answer": "Guido van Rossum."
+      }
+    ]
+  }
+}

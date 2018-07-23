@@ -1,39 +1,13 @@
 import { LIST_DECKS, NEW_DECK, ADD_CARD } from './../actions/deck';
 
-const initialState = {
-  JavaScript: {
-    title: 'JavaScript',
-    questions: [
-      {
-        question: 'What is JavaScript?',
-        answer: 'JavaScript is a high-level, interpreted programming language.'
-      }
-    ]
-  },
-  Python: {
-    title: 'Python',
-    questions: [
-      {
-        question: 'What is Python?',
-        answer:
-          'Python is an interpreted high-level programming language for general-purpose programming.'
-      },
-      {
-        question: 'Who is the creator of python?',
-        answer: 'Guido van Rossum.'
-      }
-    ]
-  }
-};
-
-export default function reducer(state = initialState, action) {
+export default function reducer(state = {}, action) {
   switch (action.type) {
     case LIST_DECKS:
       return {
-        decks: state,
-        listDecks: Object.keys(state).map(item => ({
+        decks: action.decks,
+        listDecks: Object.keys(action.decks).map(item => ({
           name: item,
-          cards: initialState[item].questions.length
+          cards: action.decks[item].questions.length
         }))
       };
     case NEW_DECK:
@@ -41,10 +15,7 @@ export default function reducer(state = initialState, action) {
         ...state,
         decks: {
           ...state.decks,
-          [action.name]: {
-            title: action.name,
-            questions: []
-          }
+          ...action.item
         }
       };
     case ADD_CARD:
