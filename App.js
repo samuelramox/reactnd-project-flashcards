@@ -7,7 +7,7 @@ import reducer from './reducers';
 import AddCard from './components/AddCard';
 import Deck from './components/Deck';
 import Quiz from './components/Quiz';
-import StatusBar from './components/StatusBar';
+import FlashCardsStatusBar from './components/FlashCardsStatusBar';
 import Tabs from './components/Tabs';
 import { setLocalNotification } from './utils/api';
 
@@ -34,7 +34,10 @@ class App extends Component {
     return (
       <Provider store={createStore(reducer)}>
         <View style={{ flex: 1 }}>
-          <StatusBar backgroundColor="#0D8ABC" barStyle="light-content" />
+          <FlashCardsStatusBar
+            backgroundColor="#0D8ABC"
+            barStyle="light-content"
+          />
           <DecksNavigator />
         </View>
       </Provider>
