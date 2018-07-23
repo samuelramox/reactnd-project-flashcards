@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Result from '../Result';
-import { container, deckTitle, deckSubtitle } from './../../utils/styles';
-import { black, red } from './../../utils/colors';
+import { container, deckTitle } from '../../utils/styles';
+import { black, red } from '../../utils/colors';
 
 class Quiz extends Component {
   constructor() {
@@ -85,6 +85,7 @@ class Quiz extends Component {
     } = this.state;
     const question = questions[indexQuestion].question;
     const answer = questions[indexQuestion].answer;
+
     if (isResultScreen) {
       return (
         <Result
@@ -95,6 +96,7 @@ class Quiz extends Component {
         />
       );
     }
+
     return (
       <View style={container}>
         <Text style={[styles.deckTitle, { fontSize: 30, textAlign: 'center' }]}>

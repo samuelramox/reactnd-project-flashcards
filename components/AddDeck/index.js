@@ -1,20 +1,17 @@
 import React, { Component } from 'react';
 import {
   View,
-  Alert,
   Text,
   StyleSheet,
   TextInput,
   KeyboardAvoidingView,
-  TouchableOpacity,
-  AsyncStorage
+  TouchableOpacity
 } from 'react-native';
-import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
-import { updateDecks, getDecks } from './../../utils/api';
-import { listDecks } from './../../actions/deck';
-import { container, deckTitle } from './../../utils/styles';
-import { black } from './../../utils/colors';
+import { updateDecks, getDecks } from '../../utils/api';
+import { listDecks } from '../../actions/deck';
+import { container, deckTitle } from '../../utils/styles';
+import { black } from '../../utils/colors';
 
 class AddDeck extends Component {
   constructor(props) {
@@ -35,7 +32,6 @@ class AddDeck extends Component {
         questions: []
       }
     };
-
     await updateDecks(newDeckObj);
     getDecks()
       .then(res => dispatch(listDecks(JSON.parse(res))))
@@ -48,6 +44,7 @@ class AddDeck extends Component {
 
   render() {
     const { titleDeck } = this.state;
+
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
         <View style={{ width: 300 }}>
@@ -57,7 +54,7 @@ class AddDeck extends Component {
               { fontSize: 28, marginBottom: 28, textAlign: 'center' }
             ]}
           >
-            What is the title of your new Deck?
+            What is the title of your new deck?
           </Text>
 
           <TextInput

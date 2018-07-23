@@ -8,10 +8,10 @@ import {
   TouchableOpacity
 } from 'react-native';
 import { connect } from 'react-redux';
-import { listDecks } from './../../actions/deck';
-import { getDecks, updateDecks } from './../../utils/api';
-import { container, deckTitle } from './../../utils/styles';
-import { black } from './../../utils/colors';
+import { listDecks } from '../../actions/deck';
+import { getDecks, updateDecks } from '../../utils/api';
+import { container, deckTitle } from '../../utils/styles';
+import { black } from '../../utils/colors';
 
 class AddCard extends Component {
   constructor() {
@@ -43,6 +43,7 @@ class AddCard extends Component {
 
   render() {
     const { question, answer } = this.state;
+
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
         <View style={{ width: 300 }}>
@@ -52,7 +53,7 @@ class AddCard extends Component {
               { fontSize: 18, marginBottom: 30, textAlign: 'center' }
             ]}
           >
-            Type your question for the new Card
+            Type your question for the new card
           </Text>
 
           <TextInput

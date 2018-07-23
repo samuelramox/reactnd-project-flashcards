@@ -1,11 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
-import { container, deckTitle, deckSubtitle } from './../../utils/styles';
-import { black } from './../../utils/colors';
+import { container, deckTitle, deckSubtitle } from '../../utils/styles';
+import { black } from '../../utils/colors';
 
 const Result = props => {
   const { correctAnswers, startQuiz, finishQuiz, totalQuestions } = props;
+
   return (
     <View style={container}>
       <Text style={[styles.deckTitle, { fontSize: 30 }]}>Result</Text>

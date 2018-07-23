@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import Introduction from './../../components/Introduction';
-import { container, deckTitle, deckSubtitle } from './../../utils/styles';
-import { black } from './../../utils/colors';
+import Introduction from '../Introduction';
+import { container, deckTitle, deckSubtitle } from '../../utils/styles';
+import { black } from '../../utils/colors';
 
 class Deck extends Component {
   static navigationOptions({ navigation }) {
@@ -16,6 +16,7 @@ class Deck extends Component {
     const { state } = navigation;
     const { params } = state;
     const { deck } = params;
+
     return (
       <View style={container}>
         <Introduction titleSize={30} subtitleSize={17} deck={deck} />

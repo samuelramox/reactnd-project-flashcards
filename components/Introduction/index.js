@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
-import { deckTitle, deckSubtitle } from './../../utils/styles';
+import { deckTitle, deckSubtitle } from '../../utils/styles';
 
 const Introduction = props => {
   const { titleSize, subtitleSize, deck } = props;

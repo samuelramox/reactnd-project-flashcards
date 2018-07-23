@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
-import Introduction from './../../components/Introduction';
-import { listDecks } from './../../actions/deck';
-import { getDecks, setDecks } from './../../utils/api';
-import { gray } from './../../utils/colors';
-import initialData from './../../utils/initialData.json';
+import Introduction from '../Introduction';
+import { listDecks } from '../../actions/deck';
+import { getDecks, setDecks } from '../../utils/api';
+import { gray } from '../../utils/colors';
+import initialData from '../../utils/initialData.json';
 
 class Decks extends Component {
   constructor() {
@@ -61,6 +61,7 @@ class Decks extends Component {
     const { navigation = {}, decks } = this.props;
     const { isFetching } = this.state;
     const decksArray = decks !== undefined ? Object.values(decks) : [];
+
     if (isFetching) {
       return (
         <View style={styles.container}>
@@ -68,6 +69,7 @@ class Decks extends Component {
         </View>
       );
     }
+
     if (decksArray.length === 0) {
       return (
         <View style={styles.container}>
@@ -77,6 +79,7 @@ class Decks extends Component {
         </View>
       );
     }
+
     return (
       <View>
         {decksArray.map(deck => (
