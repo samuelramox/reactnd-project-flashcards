@@ -13,13 +13,12 @@ class Deck extends Component {
 
   render() {
     const { navigation } = this.props;
+    const { state } = navigation;
+    const { params } = state;
+    const { deck } = params;
     return (
       <View style={container}>
-        <Introduction
-          titleSize={30}
-          subtitleSize={17}
-          deck={navigation.state.params.deck}
-        />
+        <Introduction titleSize={30} subtitleSize={17} deck={deck} />
 
         <View style={{ marginTop: 80, width: 300 }}>
           <TouchableOpacity onPress={() => navigation.navigate('AddCard')}>
@@ -28,7 +27,9 @@ class Deck extends Component {
             </Text>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => navigation.navigate('Quiz')}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Quiz', { deck })}
+          >
             <Text
               style={[
                 styles.button,
