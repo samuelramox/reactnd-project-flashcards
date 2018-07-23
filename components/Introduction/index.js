@@ -6,6 +6,7 @@ import { deckTitle, deckSubtitle } from '../../utils/styles';
 const Introduction = props => {
   const { titleSize, subtitleSize, deck } = props;
   const cards = deck.questions.length;
+
   return (
     <View style={styles.container}>
       <Text style={[styles.deckTitle, { fontSize: titleSize }]}>

@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 import { container, deckTitle, deckSubtitle } from '../../utils/styles';
-import { black } from '../../utils/colors';
+import { black, white } from '../../utils/colors';
 
 const Result = props => {
   const { correctAnswers, startQuiz, finishQuiz, totalQuestions } = props;
@@ -27,10 +27,7 @@ const Result = props => {
 
         <TouchableOpacity onPress={() => finishQuiz()}>
           <Text
-            style={[
-              styles.button,
-              { backgroundColor: black, color: '#fff', borderColor: black }
-            ]}
+            style={[styles.button, { backgroundColor: black, color: white }]}
           >
             Return to the Deck View
           </Text>
@@ -54,9 +51,8 @@ const styles = StyleSheet.create({
   button: {
     paddingTop: 20,
     paddingBottom: 20,
-    marginTop: 5,
-    marginBottom: 5,
-    fontSize: 14,
+    marginBottom: 10,
+    fontSize: 18,
     borderRadius: 5,
     borderWidth: 1,
     textAlign: 'center'

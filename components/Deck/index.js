@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Introduction from '../Introduction';
 import { container, deckTitle, deckSubtitle } from '../../utils/styles';
-import { black } from '../../utils/colors';
+import { black, white } from '../../utils/colors';
 
 class Deck extends Component {
   static navigationOptions({ navigation }) {
@@ -33,17 +33,20 @@ class Deck extends Component {
           <TouchableOpacity
             onPress={() =>
               deck.questions.length === 0
-                ? alert('please add a card first')
+                ? alert('Please add a card first')
                 : navigation.navigate('Quiz', { deck })
             }
           >
             <Text
               style={[
                 styles.button,
-                { backgroundColor: black, color: '#fff', borderColor: black }
+                {
+                  backgroundColor: black,
+                  color: white
+                }
               ]}
             >
-              start a quiz
+              Start a quiz
             </Text>
           </TouchableOpacity>
         </View>
@@ -57,11 +60,10 @@ const styles = StyleSheet.create({
   deckTitle,
   deckSubtitle,
   button: {
-    paddingTop: 20,
-    paddingBottom: 20,
-    marginTop: 5,
-    marginBottom: 5,
-    fontSize: 14,
+    paddingTop: 16,
+    paddingBottom: 16,
+    marginBottom: 10,
+    fontSize: 18,
     borderRadius: 5,
     borderWidth: 1,
     textAlign: 'center'

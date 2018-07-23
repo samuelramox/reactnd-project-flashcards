@@ -1,7 +1,6 @@
 import { createBottomTabNavigator } from 'react-navigation';
 import AddDeck from '../AddDeck';
 import Decks from '../Decks';
-import { yellow } from '../../utils/colors';
 
 const Tabs = createBottomTabNavigator(
   {
@@ -12,14 +11,16 @@ const Tabs = createBottomTabNavigator(
       screen: AddDeck
     }
   },
-  {
-    navigationOptions: {
-      header: null
-    }
-  },
+
   {
     tabBarOptions: {
-      activeTintColor: yellow
+      labelStyle: {
+        fontSize: 16
+      },
+      style: {
+        height: 50,
+        paddingBottom: 15
+      }
     }
   }
 );

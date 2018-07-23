@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 import { listDecks } from '../../actions/deck';
 import { getDecks, updateDecks } from '../../utils/api';
 import { container, deckTitle } from '../../utils/styles';
-import { black } from '../../utils/colors';
+import { black, white } from '../../utils/colors';
 
 class AddCard extends Component {
   constructor() {
@@ -37,7 +37,7 @@ class AddCard extends Component {
     await updateDecks(newDeckObj);
     getDecks()
       .then(res => dispatch(listDecks(JSON.parse(res))))
-      .then(alert('card inserted succesfuly'))
+      .then(alert('Card inserted succesfuly'))
       .then(navigation.navigate('Deck', { deck: newDeckObj[deck.title] }));
   };
 
@@ -53,31 +53,40 @@ class AddCard extends Component {
               { fontSize: 18, marginBottom: 30, textAlign: 'center' }
             ]}
           >
-            Type your question for the new card
+            Type your question for the new card:
           </Text>
 
           <TextInput
             style={styles.input}
             value={question}
-            placeholder="question for the card"
+            placeholder="Question for the card"
             onChangeText={text => this.setState({ question: text })}
           />
 
           <TextInput
             style={styles.input}
             value={answer}
-            placeholder="Answer for the question above"
+            placeholder="Answer for the question"
             onChangeText={text => this.setState({ answer: text })}
           />
 
           <TouchableOpacity
             style={[
               styles.button,
-              { backgroundColor: black, alignSelf: 'flex-end' }
+              {
+                backgroundColor: black,
+                alignSelf: 'center'
+              }
             ]}
             onPress={this.submitValue}
           >
-            <Text style={{ fontSize: 18, color: '#fff', textAlign: 'center' }}>
+            <Text
+              style={{
+                fontSize: 18,
+                color: white,
+                textAlign: 'center'
+              }}
+            >
               Submit
             </Text>
           </TouchableOpacity>
@@ -91,8 +100,8 @@ const styles = StyleSheet.create({
   container,
   deckTitle,
   input: {
-    fontSize: 20,
-    height: 44,
+    fontSize: 18,
+    height: 50,
     padding: 8,
     borderWidth: 1,
     marginTop: 10,
@@ -101,7 +110,7 @@ const styles = StyleSheet.create({
   button: {
     paddingTop: 16,
     paddingBottom: 16,
-    marginTop: 45,
+    marginTop: 40,
     borderRadius: 3,
     borderWidth: 0,
     width: 200

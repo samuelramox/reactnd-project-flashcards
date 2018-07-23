@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Result from '../Result';
 import { container, deckTitle } from '../../utils/styles';
-import { black, red } from '../../utils/colors';
+import { green, red, white } from '../../utils/colors';
 
 class Quiz extends Component {
   constructor() {
@@ -103,7 +103,9 @@ class Quiz extends Component {
           {isAnswer ? question : answer}
         </Text>
         <TouchableOpacity onPress={this.switchScreen}>
-          <Text style={{ color: red }}>{isAnswer ? 'answer' : 'question'}</Text>
+          <Text style={{ color: red, fontSize: 20, marginTop: 10 }}>
+            {isAnswer ? 'Answer' : 'Question'}
+          </Text>
         </TouchableOpacity>
 
         <View style={{ marginTop: 80, width: 300 }}>
@@ -113,7 +115,9 @@ class Quiz extends Component {
             <Text
               style={[
                 styles.button,
-                { backgroundColor: black, color: '#fff', borderColor: black }
+                {
+                  backgroundColor: green
+                }
               ]}
             >
               Correct
@@ -122,7 +126,14 @@ class Quiz extends Component {
           <TouchableOpacity
             onPress={() => this.handleResult('incorrect', questions.length)}
           >
-            <Text style={[styles.button, { borderColor: black, color: black }]}>
+            <Text
+              style={[
+                styles.button,
+                {
+                  backgroundColor: red
+                }
+              ]}
+            >
               Incorrect
             </Text>
           </TouchableOpacity>
@@ -138,11 +149,10 @@ const styles = StyleSheet.create({
   button: {
     paddingTop: 20,
     paddingBottom: 20,
-    marginTop: 5,
-    marginBottom: 5,
-    fontSize: 14,
+    marginBottom: 10,
+    fontSize: 18,
     borderRadius: 5,
-    borderWidth: 1,
+    color: white,
     textAlign: 'center'
   }
 });

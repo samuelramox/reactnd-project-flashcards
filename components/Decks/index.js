@@ -21,7 +21,7 @@ class Decks extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { decks } = this.props;
-    const { updated } = this.state;
+
     if (decks !== undefined) {
       const decksArr = Object.values(decks);
       if (
@@ -73,7 +73,7 @@ class Decks extends Component {
       return (
         <View style={styles.container}>
           <Text>
-            DeckList is empty, click on the newDeck tab for insert a new Deck
+            DeckList is empty, click on the AddDeck tab for insert a new Deck
           </Text>
         </View>
       );
@@ -100,6 +100,8 @@ const styles = StyleSheet.create({
     height: 100,
     borderBottomColor: gray,
     borderBottomWidth: 1,
+    marginRight: 8,
+    marginLeft: 8,
     justifyContent: 'center'
   }
 });

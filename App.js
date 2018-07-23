@@ -10,6 +10,7 @@ import Quiz from './components/Quiz';
 import FlashCardsStatusBar from './components/FlashCardsStatusBar';
 import Tabs from './components/Tabs';
 import { setLocalNotification } from './utils/api';
+import { black } from './utils/colors';
 
 const DecksNavigator = createStackNavigator({
   Home: {
@@ -35,7 +36,7 @@ class App extends Component {
       <Provider store={createStore(reducer)}>
         <View style={{ flex: 1 }}>
           <FlashCardsStatusBar
-            backgroundColor="#0D8ABC"
+            backgroundColor={black}
             barStyle="light-content"
           />
           <DecksNavigator />

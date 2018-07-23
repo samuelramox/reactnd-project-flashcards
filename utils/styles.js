@@ -1,14 +1,17 @@
-import { black, gray } from './colors';
+import { black, gray, white } from './colors';
 
 export const container = {
   flex: 1,
-  backgroundColor: '#fff',
+  backgroundColor: white,
   alignItems: 'center',
   justifyContent: 'center'
 };
 
 export const deckTitle = {
-  color: black
+  color: black,
+  fontSize: 28,
+  marginBottom: 28,
+  textAlign: 'center'
 };
 
 export const deckSubtitle = {
