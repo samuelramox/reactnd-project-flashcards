@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import Result from '../Result';
 import { container, deckTitle, deckSubtitle } from './../../utils/styles';
 import { black, red } from './../../utils/colors';
 
@@ -10,7 +11,8 @@ class Quiz extends Component {
       indexQuestion: 0,
       isAnswer: true,
       correctAnswers: 0,
-      result: 0
+      result: 0,
+      isResultScreen: false
     };
   }
 
@@ -24,12 +26,8 @@ class Quiz extends Component {
     const { indexQuestion, correctAnswers } = this.state;
     if (totalQuestions === indexQuestion + 1) {
       await this.updateCorrectAnswers(result);
-      alert(`The number of correct answers is: ${this.state.correctAnswers}`);
       this.setState({
-        indexQuestion: 0,
-        isAnswer: true,
-        correctAnswers: 0,
-        result: 0
+        isResultScreen: true
       });
     } else {
       this.updateCorrectAnswers(result);
@@ -38,6 +36,16 @@ class Quiz extends Component {
         isAnswer: true
       }));
     }
+  };
+
+  cleanState = () => {
+    this.setState({
+      indexQuestion: 0,
+      isAnswer: true,
+      correctAnswers: 0,
+      result: 0,
+      isResultScreen: false
+    });
   };
 
   updateCorrectAnswers = answer => {
@@ -50,15 +58,42 @@ class Quiz extends Component {
     });
   };
 
+  resetQuiz = () => {
+    this.cleanState();
+  };
+
+  finishQuiz = () => {
+    const { navigation = {} } = this.props;
+    const { state = {} } = navigation;
+    const { params = {} } = state;
+    const { deck } = params;
+    const { questions } = deck;
+    navigation.navigate('Deck', { deck });
+  };
+
   render() {
     const { navigation = {} } = this.props;
     const { state = {} } = navigation;
     const { params = {} } = state;
     const { deck } = params;
     const { questions } = deck;
-    const { indexQuestion, isAnswer } = this.state;
+    const {
+      indexQuestion,
+      isAnswer,
+      isResultScreen,
+      correctAnswers
+    } = this.state;
     const question = questions[indexQuestion].question;
     const answer = questions[indexQuestion].answer;
+    if (isResultScreen) {
+      return (
+        <Result
+          correctAnswers={correctAnswers}
+          startQuiz={this.resetQuiz}
+          finishQuiz={this.finishQuiz}
+        />
+      );
+    }
     return (
       <View style={container}>
         <Text style={[styles.deckTitle, { fontSize: 30, textAlign: 'center' }]}>
