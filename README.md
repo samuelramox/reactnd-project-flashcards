@@ -45,6 +45,7 @@ yarn start
 
 ## Testing
 
+This project was tested on IOS and Android platforms.
 You can use the following tools to test the app:
 
 - [Expo](https://expo.io/) (Recommended);
