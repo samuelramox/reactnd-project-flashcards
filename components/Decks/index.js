@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import Introduction from '../Introduction';
@@ -95,14 +94,6 @@ class Decks extends Component {
     );
   }
 }
-
-Decks.propTypes = {
-  decks: PropTypes.array
-};
-
-Decks.defaultProps = {
-  decks: false
-};
 
 const styles = StyleSheet.create({
   item: {
