@@ -3,9 +3,13 @@
     "title": "JavaScript",
     "questions": [
       {
-        "questions": "What is JavaScript?",
+        "question": "What is JavaScript?",
         "answer":
           "JavaScript is a high-level, interpreted programming language."
+      },
+      {
+        "question": "JavaScript is multi-paradigm?",
+        "answer": "Yes"
       }
     ]
   },
@@ -19,7 +23,11 @@
       },
       {
         "question": "Who is the creator of python?",
-        "answer": "Guido van Rossum."
+        "answer": "Guido van Rossum"
+      },
+      {
+        "question": "Python uses whitespace indentation?",
+        "answer": "Yes"
       }
     ]
   }
