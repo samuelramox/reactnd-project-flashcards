@@ -1,9 +1,11 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import PropTypes from 'prop-types';
 import { container, deckTitle, deckSubtitle } from './../../utils/styles';
 import { black } from './../../utils/colors';
 
-const Result = ({ correctAnswers, startQuiz, finishQuiz, totalQuestions }) => {
+const Result = props => {
+  const { correctAnswers, startQuiz, finishQuiz, totalQuestions } = props;
   return (
     <View style={container}>
       <Text style={[styles.deckTitle, { fontSize: 30 }]}>Result</Text>
@@ -35,6 +37,13 @@ const Result = ({ correctAnswers, startQuiz, finishQuiz, totalQuestions }) => {
       </View>
     </View>
   );
+};
+
+Result.propTypes = {
+  correctAnswers: PropTypes.number.isRequired,
+  startQuiz: PropTypes.func.isRequired,
+  finishQuiz: PropTypes.func.isRequired,
+  totalQuestions: PropTypes.number.isRequired
 };
 
 const styles = StyleSheet.create({
