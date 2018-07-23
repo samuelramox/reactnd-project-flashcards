@@ -16,9 +16,39 @@ class Decks extends Component {
     };
   }
 
-  async componentDidMount() {
+  componentDidMount() {
+    this.updateComponent(initialData);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { decks } = this.props;
+    const { updated } = this.state;
+    if (decks !== undefined) {
+      const decksArr = Object.values(decks);
+      if (
+        decksArr.some(item => {
+          if (
+            item &&
+            item.questions &&
+            nextProps.decks &&
+            nextProps.decks[item.title]
+          ) {
+            return (
+              item.questions.length >
+              nextProps.decks[item.title].questions.length
+            );
+          }
+          return false;
+        })
+      ) {
+        this.updateComponent(decks);
+      }
+    }
+  }
+
+  async updateComponent(data) {
     const { dispatch } = this.props;
-    await setDecks(initialData);
+    await setDecks(data);
     getDecks().then(result => {
       dispatch(listDecks(JSON.parse(result)));
       this.setState({

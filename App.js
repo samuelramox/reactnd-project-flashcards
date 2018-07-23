@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { View } from 'react-native';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 import { createStore } from 'redux';
@@ -6,10 +6,11 @@ import { Provider } from 'react-redux';
 import reducer from './reducers';
 import AddCard from './components/AddCard';
 import AddDeck from './components/AddDeck';
-import Deck from './components/Deck/';
+import Deck from './components/Deck';
 import Decks from './components/Decks';
 import Quiz from './components/Quiz';
-import StatusBar from './components/StatusBar/';
+import StatusBar from './components/StatusBar';
+import { setLocalNotification } from './utils/api';
 
 const Tabs = TabNavigator(
   {
@@ -47,15 +48,20 @@ const DecksNavigator = StackNavigator({
   }
 });
 
-const store = createStore(reducer, applyMiddleware(thunk));
-
-export default function App() {
-  return (
-    <Provider store={createStore(reducer)}>
-      <View style={{ flex: 1 }}>
-        <StatusBar backgroundColor="#0D8ABC" barStyle="light-content" />
-        <DecksNavigator />
-      </View>
-    </Provider>
-  );
+class App extends Component {
+  componentDidMount() {
+    setLocalNotification();
+  }
+  render() {
+    return (
+      <Provider store={createStore(reducer)}>
+        <View style={{ flex: 1 }}>
+          <StatusBar backgroundColor="#0D8ABC" barStyle="light-content" />
+          <DecksNavigator />
+        </View>
+      </Provider>
+    );
+  }
 }
+
+export default App;
