@@ -91,6 +91,7 @@ class Quiz extends Component {
           correctAnswers={correctAnswers}
           startQuiz={this.resetQuiz}
           finishQuiz={this.finishQuiz}
+          totalQuestions={questions.length}
         />
       );
     }

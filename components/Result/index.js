@@ -3,13 +3,16 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { container, deckTitle, deckSubtitle } from './../../utils/styles';
 import { black } from './../../utils/colors';
 
-const Result = ({ correctAnswers, startQuiz, finishQuiz }) => {
+const Result = ({ correctAnswers, startQuiz, finishQuiz, totalQuestions }) => {
   return (
     <View style={container}>
       <Text style={[styles.deckTitle, { fontSize: 30 }]}>Result</Text>
 
       <Text style={[styles.deckSubtitle, { fontSize: 17 }]}>
-        {`The number of correct answers is ${correctAnswers}`}
+        {`You have completed ${(
+          (correctAnswers * 100) /
+          totalQuestions
+        ).toFixed(2)}% of the questions`}
       </Text>
 
       <View style={{ marginTop: 80, width: 300 }}>
