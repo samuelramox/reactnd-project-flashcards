@@ -15,7 +15,7 @@ const Tabs = createBottomTabNavigator(
   {
     tabBarOptions: {
       labelStyle: {
-        fontSize: 16
+        fontSize: 12
       },
       style: {
         height: 50,
