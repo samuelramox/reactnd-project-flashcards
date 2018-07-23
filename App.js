@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
-import { StackNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import reducer from './reducers';
@@ -11,7 +11,7 @@ import FlashCardsStatusBar from './components/FlashCardsStatusBar';
 import Tabs from './components/Tabs';
 import { setLocalNotification } from './utils/api';
 
-const DecksNavigator = StackNavigator({
+const DecksNavigator = createStackNavigator({
   Home: {
     screen: Tabs
   },
