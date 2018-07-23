@@ -7,10 +7,8 @@ import {
   KeyboardAvoidingView,
   TouchableOpacity
 } from 'react-native';
-import { connect } from 'react-redux';
 import { container, deckTitle } from './../../utils/styles';
 import { black } from './../../utils/colors';
-import { createNewCard } from './../../actions/deck';
 
 class AddCard extends Component {
   constructor() {
@@ -21,14 +19,6 @@ class AddCard extends Component {
     };
   }
 
-  getCard(props) {
-    const { navigation = {} } = props;
-    const { state = {} } = navigation;
-    const { params = {} } = state;
-    const { card = {} } = params;
-    return card;
-  }
-
   async submitValue() {
     const { dispatch, navigation, deckList } = this.props;
     const { question, answer } = this.state;
@@ -37,7 +27,6 @@ class AddCard extends Component {
       question,
       answer
     };
-
     const { questions } = deckList[cardName];
     questions.push(questionObj);
     const newObj = {
@@ -48,12 +37,15 @@ class AddCard extends Component {
     };
     await dispatch(createNewCard(newObj));
     alert('Card Succesfully created');
-    console.log(deckList);
+    console.log('Updated list', deckList);
   }
 
   render() {
-    const card = this.getCard(this.props);
     const { question, answer } = this.state;
+    const { navigation } = this.props;
+    const { state = {} } = navigation;
+    const { params = {} } = state;
+    const { card } = params;
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
         <View style={{ width: 300 }}>
@@ -63,7 +55,7 @@ class AddCard extends Component {
               { fontSize: 18, marginBottom: 30, textAlign: 'center' }
             ]}
           >
-            Type your question for the new {card} Card
+            Type your question for the new {card.title} Card
           </Text>
 
           <TextInput
@@ -118,10 +110,4 @@ const styles = StyleSheet.create({
   }
 });
 
-function mapStateToProps(state) {
-  return {
-    deckList: state.decks
-  };
-}
-
-export default connect(mapStateToProps)(AddCard);
+export default AddCard;

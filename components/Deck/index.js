@@ -5,25 +5,18 @@ import { black } from './../../utils/colors';
 
 class Deck extends Component {
   static navigationOptions({ navigation }) {
-    const { state = {} } = navigation;
-    const { params = {} } = state;
-    const { card = {} } = params;
     return {
-      title: card.name
+      title: navigation.state.params.deckList.name
     };
-  }
-
-  getCard() {
-    const { navigation = {} } = this.props;
-    const { state = {} } = navigation;
-    const { params = {} } = state;
-    const { card = {} } = params;
-    return card;
   }
 
   render() {
     const { navigation = {} } = this.props;
-    const card = this.getCard();
+    const { state = {} } = navigation;
+    const { params = {} } = state;
+    const { deckList, decks } = params;
+    const card = deckList;
+    const { questions } = decks;
     return (
       <View style={container}>
         <Text style={[styles.deckTitle, { fontSize: 30 }]}>{card.name}</Text>
@@ -32,13 +25,15 @@ class Deck extends Component {
         </Text>
         <View style={{ marginTop: 80, width: 300 }}>
           <TouchableOpacity
-            onPress={() => navigation.navigate('AddCard', { card: card.name })}
+            onPress={() => navigation.navigate('AddCard', { card: decks })}
           >
             <Text style={[styles.button, { borderColor: black, color: black }]}>
               Add a card
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate('Quiz')}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Quiz', { questions })}
+          >
             <Text
               style={[
                 styles.button,

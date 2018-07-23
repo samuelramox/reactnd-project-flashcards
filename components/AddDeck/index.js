@@ -5,38 +5,44 @@ import {
   StyleSheet,
   TextInput,
   KeyboardAvoidingView,
-  TouchableOpacity
+  TouchableOpacity,
+  AsyncStorage
 } from 'react-native';
-import { connect } from 'react-redux';
+import { NavigationActions } from 'react-navigation';
 import { container, deckTitle } from './../../utils/styles';
-import { newDeck } from './../../actions/deck';
 import { black } from './../../utils/colors';
 
 class AddDeck extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       titleDeck: ''
     };
   }
 
-  async submit() {
+  submit = async () => {
     const { titleDeck } = this.state;
-    const { decks, dispatch } = this.props;
+    const { decks, dispatch, navigation } = this.props;
     const newDeckObj = {
       [titleDeck]: {
         title: titleDeck,
         questions: []
       }
     };
+    const key = '@Udacity:flashcards';
     await dispatch(newDeck(newDeckObj));
     alert('data succesfully updated');
-    console.log(this.props.decks);
-  }
+    AsyncStorage.setItem(key, JSON.stringify(decks));
+    const navigateAction = NavigationActions.navigate({
+      routeName: 'NewDeck',
+      params: { decks },
+      action: NavigationActions.navigate({ routeName: 'Home' })
+    });
+  };
 
   render() {
     const { titleDeck } = this.state;
-    const { dispatch, data } = this.props;
+    const { dispatch, decks } = this.props;
 
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
@@ -54,7 +60,7 @@ class AddDeck extends Component {
             style={styles.input}
             value={titleDeck}
             placeholder="question for the card"
-            onChange={text => this.setState({ titleDeck: text })}
+            onChangeText={text => this.setState({ titleDeck: text })}
           />
 
           <TouchableOpacity
@@ -95,8 +101,4 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = state => ({
-  data: state
-});
-
-export default connect(mapStateToProps)(AddDeck);
+export default AddDeck;

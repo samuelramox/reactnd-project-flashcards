@@ -3,24 +3,35 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { listDecks } from './../../actions/deck';
-import { black, gray } from './../../utils/colors';
+import { getDecks, setDecks } from './../../utils/api';
 import { container, deckTitle, deckSubtitle } from './../../utils/styles';
 import { gray } from './../../utils/colors';
-
-const data = [
-  { name: 'Javascript', cards: 3 },
-  { name: 'Python', cards: 3 },
-  { name: 'PHP', cards: 3 }
-];
+import initialData from './../../utils/initialData.json';
 
 class Decks extends Component {
-  componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch(listDecks());
+  constructor() {
+    super();
+    this.state = {
+      isFetching: true
+    };
   }
+  async componentDidMount() {
+    const { dispatch } = this.props;
+    await setDecks(initialData);
+
+    getDecks().then(result => {
+      dispatch(listDecks(JSON.parse(result)));
+      this.setState({
+        isFetching: false
+      });
+    });
+  }
+
   render() {
-    const { decks, navigation = {} } = this.props;
-    if (decks === undefined) {
+    const { navigation = {}, decks } = this.props;
+    const { isFetching } = this.state;
+    console.log(decks);
+    if (isFetching) {
       return (
         <View style={styles.container}>
           <Text>Loading</Text>
@@ -29,11 +40,16 @@ class Decks extends Component {
     }
     return (
       <View>
-        {decks.map(item => (
+        {decks.map((item, index) => (
           <TouchableOpacity
             key={item.name}
             style={styles.item}
-            onPress={() => navigation.navigate('Deck', { card: item })}
+            onPress={() =>
+              navigation.navigate('Deck', {
+                decks: decks[item.name],
+                deckList: item
+              })
+            }
           >
             <Text style={[styles.deckTitle, { fontSize: 22 }]}>
               {item.name}
@@ -62,7 +78,7 @@ const styles = StyleSheet.create({
   deckSubtitle,
   item: {
     height: 100,
-    borderBottomColor: darkGray,
+    borderBottomColor: gray,
     borderBottomWidth: 1,
     justifyContent: 'center',
     alignItems: 'center'
