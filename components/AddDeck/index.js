@@ -24,7 +24,7 @@ class AddDeck extends Component {
 
   submit = async () => {
     const { titleDeck } = this.state;
-    const { dispatch } = this.props;
+    const { dispatch, navigation } = this.props;
 
     const newDeckObj = {
       [titleDeck]: {
@@ -37,7 +37,6 @@ class AddDeck extends Component {
       .then(res => dispatch(listDecks(JSON.parse(res))))
       .then(res => {
         alert('Data inserted with success');
-        const { navigation } = this.props;
         navigation.navigate('Decks', { deck: newDeckObj[titleDeck] });
       });
   };
