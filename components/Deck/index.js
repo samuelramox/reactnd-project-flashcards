@@ -26,7 +26,7 @@ class Deck extends Component {
             onPress={() => navigation.navigate('AddCard', { deck })}
           >
             <Text style={[styles.button, { borderColor: black, color: black }]}>
-              Add a card
+              Add new card
             </Text>
           </TouchableOpacity>
 
