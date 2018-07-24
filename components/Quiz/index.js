@@ -155,7 +155,6 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
     marginBottom: 10,
     fontSize: 18,
-    borderRadius: 5,
     color: white,
     textAlign: 'center'
   }

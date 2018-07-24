@@ -53,7 +53,6 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
     marginBottom: 10,
     fontSize: 18,
-    borderRadius: 5,
     borderWidth: 1,
     textAlign: 'center'
   }
