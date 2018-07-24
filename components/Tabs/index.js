@@ -7,7 +7,7 @@ const Tabs = createBottomTabNavigator(
     Decks: {
       screen: Decks
     },
-    AddDeck: {
+    'Add Deck': {
       screen: AddDeck
     }
   },
