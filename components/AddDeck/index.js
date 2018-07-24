@@ -68,7 +68,7 @@ class AddDeck extends Component {
             onPress={this.submit}
           >
             <Text style={{ fontSize: 18, color: '#fff', textAlign: 'center' }}>
-              Submit
+              Create Deck
             </Text>
           </TouchableOpacity>
         </View>

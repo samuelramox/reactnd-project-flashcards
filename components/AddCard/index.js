@@ -87,7 +87,7 @@ class AddCard extends Component {
                 textAlign: 'center'
               }}
             >
-              Submit
+              Create Card
             </Text>
           </TouchableOpacity>
         </View>
