@@ -85,6 +85,7 @@ class Quiz extends Component {
     } = this.state;
     const question = questions[indexQuestion].question;
     const answer = questions[indexQuestion].answer;
+    const questionsLength = questions.length;
 
     if (isResultScreen) {
       return (
@@ -138,6 +139,9 @@ class Quiz extends Component {
             </Text>
           </TouchableOpacity>
         </View>
+        <Text style={{ fontSize: 20, marginTop: 10 }}>
+          {indexQuestion + 1}/{questionsLength}
+        </Text>
       </View>
     );
   }
