@@ -35,9 +35,8 @@ class AddDeck extends Component {
     await updateDecks(newDeckObj);
     getDecks()
       .then(res => dispatch(listDecks(JSON.parse(res))))
-      .then(res => {
-        alert('Data inserted with success');
-        navigation.navigate('Decks', { deck: newDeckObj[titleDeck] });
+      .then(() => {
+        navigation.navigate('Deck', { deck: newDeckObj[titleDeck] });
       });
   };
 
@@ -54,7 +53,7 @@ class AddDeck extends Component {
           <TextInput
             style={styles.input}
             value={titleDeck}
-            placeholder="Question for the card"
+            placeholder="Title for the new deck"
             onChangeText={text => this.setState({ titleDeck: text })}
           />
 
