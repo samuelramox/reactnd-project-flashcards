@@ -1,41 +1,54 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
+import { clearLocalNotification, setLocalNotification } from '../../utils/api';
 import { container, deckTitle, deckSubtitle } from '../../utils/styles';
 import { black, white } from '../../utils/colors';
 
-const Result = props => {
-  const { correctAnswers, startQuiz, finishQuiz, totalQuestions } = props;
+class Result extends Component {
+  componentDidMount() {
+    clearLocalNotification();
+    setLocalNotification();
+  }
 
-  return (
-    <View style={container}>
-      <Text style={[styles.deckTitle, { fontSize: 30 }]}>Result</Text>
+  render() {
+    const {
+      correctAnswers,
+      startQuiz,
+      finishQuiz,
+      totalQuestions
+    } = this.props;
 
-      <Text style={[styles.deckSubtitle, { fontSize: 17 }]}>
-        {`You have completed ${(
-          (correctAnswers * 100) /
-          totalQuestions
-        ).toFixed(2)}% of the questions`}
-      </Text>
+    return (
+      <View style={container}>
+        <Text style={[styles.deckTitle, { fontSize: 30 }]}>Result</Text>
 
-      <View style={{ marginTop: 80, width: 300 }}>
-        <TouchableOpacity onPress={() => startQuiz()}>
-          <Text style={[styles.button, { borderColor: black, color: black }]}>
-            Start Quiz Again
-          </Text>
-        </TouchableOpacity>
+        <Text style={[styles.deckSubtitle, { fontSize: 17 }]}>
+          {`You have completed ${(
+            (correctAnswers * 100) /
+            totalQuestions
+          ).toFixed(2)}% of the questions`}
+        </Text>
 
-        <TouchableOpacity onPress={() => finishQuiz()}>
-          <Text
-            style={[styles.button, { backgroundColor: black, color: white }]}
-          >
-            Return to the Deck View
-          </Text>
-        </TouchableOpacity>
+        <View style={{ marginTop: 80, width: 300 }}>
+          <TouchableOpacity onPress={() => startQuiz()}>
+            <Text style={[styles.button, { borderColor: black, color: black }]}>
+              Start Quiz Again
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={() => finishQuiz()}>
+            <Text
+              style={[styles.button, { backgroundColor: black, color: white }]}
+            >
+              Return to the Deck View
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
-  );
-};
+    );
+  }
+}
 
 Result.propTypes = {
   correctAnswers: PropTypes.number.isRequired,
